@@ -2,6 +2,7 @@ module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
+    '@feature-sliced',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
@@ -10,6 +11,13 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
+  settings: {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  },
   plugins: ['react-refresh', 'react'],
   rules: {
     'react-refresh/only-export-components': [
