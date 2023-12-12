@@ -9,7 +9,7 @@ type BaseProps = {
 const PageLayoutBase: FC<BaseProps> = ({ children, className }) => (
   <div
     className={cx(
-      'h-full w-full flex flex-col bg-zinc-950 text-white',
+      'h-full w-full overflow-auto flex flex-col bg-zinc-950 text-white',
       className,
     )}
   >
