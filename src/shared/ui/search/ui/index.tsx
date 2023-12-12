@@ -1,28 +1,52 @@
 import cx from 'clsx';
+import { useRef, useState } from 'react';
 
-export const Search = () => (
-  <label className="relative block w-full">
-    <input
-      type="text"
-      className={cx(
-        'w-full border border-solid border-[#313E62] rounded-lg bg-gray-900 hover:border-[#1C64F2] focus:bg-[#313E62]',
-        'px-4 py-3.5 pl-10 text-slate-500 focus:outline-none text-sm grow',
-        'peer',
-      )}
-      placeholder="Поиск"
-    />
-    <div
-      className={cx(
-        'peer-focus:fill-white peer-hover:fill-white fill-[#616D8D]',
-        'absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none',
-      )}
-    >
-      <div className="w-4 h-4">
-        <SearchIcon />
-      </div>
-    </div>
-  </label>
-);
+interface SearchProps {
+  onSearch: (value: string) => void;
+  defaultValue?: string;
+  isDisabled?: boolean;
+}
+
+export const Search = ({ onSearch, defaultValue, isDisabled }: SearchProps) => {
+  const [value, onChange] = useState(defaultValue || '');
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (inputRef.current) inputRef.current.blur();
+  };
+
+  return (
+    <form onSubmit={onSubmit}>
+      <label className="relative block w-full">
+        <input
+          type="text"
+          ref={inputRef}
+          value={value}
+          onBlur={() => onSearch(value)}
+          onChange={(e) => onChange(e.target.value)}
+          disabled={isDisabled}
+          className={cx(
+            'w-full border border-solid border-[#313E62] rounded-lg bg-gray-900 hover:border-[#1C64F2] focus:bg-[#313E62]',
+            'px-4 py-3.5 pl-10 text-white focus:outline-none text-sm grow',
+            'disabled:border-[#616D8D] disabled:bg-[#222B44] disabled:text-[#616D8D]',
+            'peer',
+          )}
+          placeholder="Поиск"
+        />
+        <div
+          className={cx(
+            'peer-focus:fill-white peer-hover:fill-white fill-[#616D8D]',
+            'absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none',
+          )}
+        >
+          <div className="w-4 h-4">
+            <SearchIcon />
+          </div>
+        </div>
+      </label>
+    </form>
+  );
+};
 
 const SearchIcon = () => (
   <svg
