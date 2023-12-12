@@ -34,9 +34,9 @@ export const Pagination = ({
   };
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-2">
       <button
-        className="flex items-center gap-2 bg-transparent"
+        className="flex items-center gap-2 px-3 bg-transparent"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1 || isDisabled}
       >
@@ -50,7 +50,7 @@ export const Pagination = ({
             key={index}
             disabled={isDisabled}
             className={cx(
-              'px-4 py-2 min-w-[50px] text-white',
+              'px-4 py-2 min-w-[50px] max-sm:px-3 max-sm:py-1 max-sm:min-w-[30px] text-white',
               currentPage === pageNumber ? 'bg-[#1C64F2]' : 'bg-transparent',
             )}
             onClick={() =>
@@ -62,7 +62,7 @@ export const Pagination = ({
         ))}
       </div>
       <button
-        className="flex items-center gap-2 bg-transparent"
+        className="flex items-center gap-2 px-3 bg-transparent"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages || isDisabled}
       >
