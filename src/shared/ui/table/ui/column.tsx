@@ -10,16 +10,25 @@ type TableColumnProps = {
 };
 
 export const TableColumn = ({ onSort, label, columnId }: TableColumnProps) => {
-  const [sortDirection, toggleSort] = useState<SortDirection>('asc');
+  const [sortDirection, toggleSort] = useState<SortDirection>(null);
 
   const onClick = () => {
     if (!onSort) return;
-    if (sortDirection === 'asc') {
-      toggleSort('desc');
-      onSort({ columnId, sortDirection: 'desc' });
-    } else {
-      toggleSort('asc');
-      onSort({ columnId, sortDirection: 'asc' });
+    switch (sortDirection) {
+      case 'asc': {
+        toggleSort('desc');
+        onSort({ columnId, sortDirection: 'desc' });
+        return;
+      }
+      case 'desc': {
+        toggleSort(null);
+        onSort({ columnId, sortDirection: null });
+        return;
+      }
+      default: {
+        toggleSort('asc');
+        onSort({ columnId, sortDirection: 'asc' });
+      }
     }
   };
 
@@ -31,7 +40,7 @@ export const TableColumn = ({ onSort, label, columnId }: TableColumnProps) => {
       onClick={() => onClick()}
     >
       <div className="text-gray-400 text-center whitespace-nowrap">{label}</div>
-      {onSort && (
+      {onSort && sortDirection && (
         <div className="w-5 h-5">
           {sortDirection === 'asc' ? <ArrowDownIcon /> : <ArrowUpIcon />}
         </div>

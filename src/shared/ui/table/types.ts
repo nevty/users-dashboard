@@ -1,4 +1,4 @@
-export type SortDirection = 'asc' | 'desc';
+export type SortDirection = 'asc' | 'desc' | null;
 
 export interface TableColumnI<T> {
   columnId: string;
