@@ -12,7 +12,6 @@ export const createTimeChartOption = ({
   backgroundColor: '#121825',
   grid: {
     left: 0,
-    right: 0,
   },
   title: {
     text: title,
