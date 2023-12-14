@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@rehooks/component-size": "^1.0.3",
     "axios": "^1.6.2",
     "clsx": "^2.0.0",
+    "echarts": "^5.4.3",
+    "echarts-for-react": "^3.0.2",
+    "rc-drawer": "^6.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
