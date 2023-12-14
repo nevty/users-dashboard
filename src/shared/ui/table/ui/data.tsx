@@ -7,7 +7,7 @@ interface TableDataProps<T> {
 
 export const TableData = <T,>({ column, item }: TableDataProps<T>) => (
   <td className="px-5 py-3">
-    <div className="justify-center flex text-white">
+    <div className="justify-center flex text-white text-center">
       {column.renderRow(item)}
     </div>
   </td>
