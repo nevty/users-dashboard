@@ -8,7 +8,7 @@ export const fetchUserList = async (page: number, search?: string, sort?: string
 
   const {
     data: { data, pages },
-  } = await axiosInstance<UserListResponse>('user/list', { params });
+  } = await axiosInstance.get<UserListResponse>('user/list', { params });
 
   const users = data.map((u) => mapDataToUsers(u));
 
