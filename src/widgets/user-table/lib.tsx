@@ -3,6 +3,7 @@ import { EditIcon, SortDirection, TableColumnI, TrashIcon } from '@shared/ui';
 
 export const createUserColumns = (
   tokenSort: (direction: SortDirection) => void,
+  selectUser: (userId: User) => void,
 ): TableColumnI<User>[] => [
   {
     columnId: 'email',
@@ -12,7 +13,11 @@ export const createUserColumns = (
   {
     columnId: 'name',
     label: 'Имя',
-    renderRow: (item) => <div className="cursor-pointer">{item.name}</div>,
+    renderRow: (item) => (
+      <div className="cursor-pointer" onClick={() => selectUser(item)}>
+        {item.name}
+      </div>
+    ),
   },
   {
     columnId: 'role',

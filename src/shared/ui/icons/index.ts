@@ -6,3 +6,4 @@ export * from './avatar';
 export * from './organization';
 export * from './edit';
 export * from './trash'
+export * from './close'
