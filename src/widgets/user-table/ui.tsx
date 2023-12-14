@@ -19,6 +19,11 @@ export const UserTable = () => {
   const [tokenSort, onTokenSort] = useState<SortDirection>(null);
   const [selectedUser, selectUser] = useState<User | null>(null);
 
+  const handleSearch = (query: string) => {
+    onSearch(query);
+    onPageChange(1);
+  };
+
   const columns = useMemo(() => createUserColumns(onTokenSort, selectUser), []);
 
   const { data, isError, isFetching } = useQuery({
@@ -38,7 +43,7 @@ export const UserTable = () => {
     <>
       <div className="mt-7">
         <Search
-          onSearch={onSearch}
+          onSearch={handleSearch}
           defaultValue={searchQuery}
           isDisabled={isFetching}
         />
