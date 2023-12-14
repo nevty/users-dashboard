@@ -1,16 +1,28 @@
 import { User } from '@entities/user';
 import { axiosInstance } from '@shared/api';
 
-export const fetchUserList = async (page: number, search?: string, sort?: string | null) => {
-  const params = { page, search, sort };
-  if (search === '') delete params.search;
-  if (!sort) delete params.sort
+interface fetchUserListParams {
+  page: number;
+  search?: string;
+  orderBy?: {
+    tokens?: string | null;
+  };
+}
 
+export const fetchUserList = async ({page, search, orderBy}: fetchUserListParams) => {
+  const params = { page, search, orderBy: '' };
+  if (search === '') delete params.search;
+  if (orderBy) {
+    params.orderBy = Object.entries(orderBy)
+      .filter((entry) => Boolean(entry[1]))
+      .map(([key, value]) => `${key}:${value}`)
+      .join(',');
+  }
   const {
     data: { data, pages },
   } = await axiosInstance.get<UserListResponse>('user/list', { params });
 
-  const users = data.map((u) => mapDataToUsers(u));
+  const users = data.map(mapDataToUsers);
 
   return { users, pages };
 };

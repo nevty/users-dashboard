@@ -23,7 +23,12 @@ export const UserTable = () => {
 
   const { data, isError, isFetching } = useQuery({
     queryKey: ['user-list', currentPage, searchQuery, tokenSort],
-    queryFn: () => fetchUserList(currentPage, searchQuery, tokenSort),
+    queryFn: () =>
+      fetchUserList({
+        page: currentPage,
+        search: searchQuery,
+        orderBy: { tokens: tokenSort },
+      }),
     staleTime: 30 * 1000,
   });
 
